@@ -251,7 +251,7 @@ class UndefinedConstraint extends Constraint
         }
 
         // apply defaults if appropriate
-        $requiredOnly = $this->factory->getConfig(self::CHECK_MODE_ONLY_REQUIRED_DEFAULTS);
+        $requiredOnly = (bool) $this->factory->getConfig(self::CHECK_MODE_ONLY_REQUIRED_DEFAULTS);
         if (isset($schema->properties) && LooseTypeCheck::isObject($value)) {
             // $value is an object or assoc array, and properties are defined - treat as an object
             foreach ($schema->properties as $currentProperty => $propertyDefinition) {

@@ -40,7 +40,7 @@ abstract class Constraint extends BaseConstraint implements ConstraintInterface
      * @param JsonPointer|null $path Current path
      * @param mixed            $i    What to append to the path
      *
-     * @return JsonPointer;
+     * @return JsonPointer
      */
     protected function incrementPath(?JsonPointer $path, $i)
     {
@@ -67,6 +67,8 @@ abstract class Constraint extends BaseConstraint implements ConstraintInterface
      * @param mixed            $schema
      * @param JsonPointer|null $path
      * @param mixed            $i
+     *
+     * @return void
      */
     protected function checkArray(&$value, $schema = null, ?JsonPointer $path = null, $i = null)
     {
@@ -85,6 +87,8 @@ abstract class Constraint extends BaseConstraint implements ConstraintInterface
      * @param mixed            $properties
      * @param mixed            $additionalProperties
      * @param mixed            $patternProperties
+     *
+     * @return void
      */
     protected function checkObject(&$value, $schema = null, ?JsonPointer $path = null, $properties = null,
         $additionalProperties = null, $patternProperties = null, $appliedDefaults = [])
@@ -103,6 +107,8 @@ abstract class Constraint extends BaseConstraint implements ConstraintInterface
      * @param mixed            $schema
      * @param JsonPointer|null $path
      * @param mixed            $i
+     *
+     * @return void
      */
     protected function checkType(&$value, $schema = null, ?JsonPointer $path = null, $i = null)
     {
@@ -119,6 +125,8 @@ abstract class Constraint extends BaseConstraint implements ConstraintInterface
      * @param mixed            $schema
      * @param JsonPointer|null $path
      * @param mixed            $i
+     *
+     * @return void
      */
     protected function checkUndefined(&$value, $schema = null, ?JsonPointer $path = null, $i = null, $fromDefault = false)
     {
@@ -137,6 +145,8 @@ abstract class Constraint extends BaseConstraint implements ConstraintInterface
      * @param mixed            $schema
      * @param JsonPointer|null $path
      * @param mixed            $i
+     *
+     * @return void
      */
     protected function checkString($value, $schema = null, ?JsonPointer $path = null, $i = null)
     {
@@ -153,6 +163,8 @@ abstract class Constraint extends BaseConstraint implements ConstraintInterface
      * @param mixed            $schema
      * @param JsonPointer|null $path
      * @param mixed            $i
+     *
+     * @return void
      */
     protected function checkNumber($value, $schema = null, ?JsonPointer $path = null, $i = null)
     {
@@ -169,6 +181,8 @@ abstract class Constraint extends BaseConstraint implements ConstraintInterface
      * @param mixed            $schema
      * @param JsonPointer|null $path
      * @param mixed            $i
+     *
+     * @return void
      */
     protected function checkEnum($value, $schema = null, ?JsonPointer $path = null, $i = null)
     {
@@ -185,6 +199,8 @@ abstract class Constraint extends BaseConstraint implements ConstraintInterface
      * @param mixed            $schema
      * @param JsonPointer|null $path
      * @param mixed            $i
+     *
+     * @return void
      */
     protected function checkConst($value, $schema = null, ?JsonPointer $path = null, $i = null)
     {
@@ -201,6 +217,8 @@ abstract class Constraint extends BaseConstraint implements ConstraintInterface
      * @param mixed            $schema
      * @param JsonPointer|null $path
      * @param mixed            $i
+     *
+     * @return void
      */
     protected function checkFormat($value, $schema = null, ?JsonPointer $path = null, $i = null)
     {

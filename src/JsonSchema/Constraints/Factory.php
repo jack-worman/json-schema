@@ -24,7 +24,7 @@ use JsonSchema\Validator;
 class Factory
 {
     /**
-     * @var SchemaStorage
+     * @var SchemaStorageInterface
      */
     protected $schemaStorage;
 
@@ -35,11 +35,13 @@ class Factory
 
     /**
      * @var int
+     * @phpstan-var int-mask-of<Constraint::CHECK_MODE_*>
      */
     private $checkMode = Constraint::CHECK_MODE_NORMAL;
 
     /**
-     * @var TypeCheck\TypeCheckInterface[]
+     * @var array<int, TypeCheck\TypeCheckInterface>
+     * @phpstan-var array<int-mask-of<Constraint::CHECK_MODE_*>, TypeCheck\TypeCheckInterface>
      */
     private $typeCheck = [];
 
@@ -75,6 +77,7 @@ class Factory
      * @param ?SchemaStorage         $schemaStorage
      * @param ?UriRetrieverInterface $uriRetriever
      * @param int                    $checkMode
+     * @phpstan-param int-mask-of<Constraint::CHECK_MODE_*> $checkMode
      */
     public function __construct(
         ?SchemaStorageInterface $schemaStorage = null,
@@ -92,6 +95,9 @@ class Factory
      * Set config values
      *
      * @param int $checkMode Set checkMode options - does not preserve existing flags
+     * @phpstan-param int-mask-of<Constraint::CHECK_MODE_*> $checkMode
+     *
+     * @return void
      */
     public function setConfig($checkMode = Constraint::CHECK_MODE_NORMAL)
     {
@@ -102,6 +108,9 @@ class Factory
      * Enable checkMode flags
      *
      * @param int $options
+     * @phpstan-param int-mask-of<Constraint::CHECK_MODE_*> $options
+     *
+     * @return void
      */
     public function addConfig($options)
     {
@@ -112,6 +121,9 @@ class Factory
      * Disable checkMode flags
      *
      * @param int $options
+     * @phpstan-param int-mask-of<Constraint::CHECK_MODE_*> $options
+     *
+     * @return void
      */
     public function removeConfig($options)
     {
@@ -122,8 +134,10 @@ class Factory
      * Get checkMode option
      *
      * @param int $options Options to get, if null then return entire bitmask
+     * @phpstan-param int-mask-of<Constraint::CHECK_MODE_*> $options Options to get, if null then return entire bitmask
      *
      * @return int
+     * @return int-mask-of<Constraint::CHECK_MODE_*>
      */
     public function getConfig($options = null)
     {
@@ -142,11 +156,17 @@ class Factory
         return $this->uriRetriever;
     }
 
+    /**
+     * @return SchemaStorageInterface
+     */
     public function getSchemaStorage()
     {
         return $this->schemaStorage;
     }
 
+    /**
+     * @return TypeCheck\TypeCheckInterface
+     */
     public function getTypeCheck()
     {
         if (!isset($this->typeCheck[$this->checkMode])) {
@@ -218,6 +238,8 @@ class Factory
      *
      * @param int $errorContext
      * @phpstan-param Validator::ERROR_DOCUMENT_VALIDATION|Validator::ERROR_SCHEMA_VALIDATION $errorContext
+     *
+     * @return void
      */
     public function setErrorContext($errorContext)
     {

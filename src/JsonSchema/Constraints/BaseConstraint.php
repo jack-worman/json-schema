@@ -39,18 +39,18 @@ class BaseConstraint
      */
     protected $factory;
 
-    /**
-     * @param Factory $factory
-     */
     public function __construct(?Factory $factory = null)
     {
         $this->factory = $factory ?: new Factory();
     }
 
+    /**
+     * @return void
+     */
     public function addError(ConstraintError $constraint, ?JsonPointer $path = null, array $more = [])
     {
-        $message = $constraint ? $constraint->getMessage() : '';
-        $name = $constraint ? $constraint->getValue() : '';
+        $message = $constraint->getMessage();
+        $name = $constraint->getValue();
         $error = [
             'property' => $this->convertJsonPointerIntoPropertyPath($path ?: new JsonPointer('')),
             'pointer' => ltrim(strval($path ?: new JsonPointer('')), '#'),
@@ -76,6 +76,9 @@ class BaseConstraint
         $this->errorMask |= $error['context'];
     }
 
+    /**
+     * @return void
+     */
     public function addErrors(array $errors)
     {
         if ($errors) {
@@ -89,6 +92,12 @@ class BaseConstraint
         }
     }
 
+    /**
+     * @param int $errorContext
+     * @phpstan-param int-mask-of<Validator::ERROR_*> $errorContext
+     *
+     * @return array
+     */
     public function getErrors($errorContext = Validator::ERROR_ALL)
     {
         if ($errorContext === Validator::ERROR_ALL) {
@@ -102,6 +111,12 @@ class BaseConstraint
         });
     }
 
+    /**
+     * @param int $errorContext
+     * @phpstan-param int-mask-of<Validator::ERROR_*> $errorContext
+     *
+     * @return int
+     */
     public function numErrors($errorContext = Validator::ERROR_ALL)
     {
         if ($errorContext === Validator::ERROR_ALL) {
@@ -111,6 +126,9 @@ class BaseConstraint
         return count($this->getErrors($errorContext));
     }
 
+    /**
+     * @return bool
+     */
     public function isValid()
     {
         return !$this->getErrors();
@@ -119,6 +137,8 @@ class BaseConstraint
     /**
      * Clears any reported errors.  Should be used between
      * multiple validation checks.
+     *
+     * @return void
      */
     public function reset()
     {
