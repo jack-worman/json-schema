@@ -22,7 +22,7 @@ interface UriRetrieverInterface
      * @param string      $uri     JSON Schema URI
      * @param null|string $baseUri
      *
-     * @return object JSON Schema contents
+     * @return object|null JSON Schema contents
      */
-    public function retrieve($uri, $baseUri = null);
+    public function retrieve($uri, $baseUri = null): ?object;
 }

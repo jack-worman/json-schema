@@ -42,12 +42,10 @@ class Validator extends BaseConstraint
      * @param mixed $schema
      * @param int   $checkMode
      *
-     * @return int
-     *
      * @phpstan-param int-mask-of<Constraint::CHECK_MODE_*> $checkMode
      * @phpstan-return int-mask-of<Validator::ERROR_*>
      */
-    public function validate(&$value, $schema = null, $checkMode = null)
+    public function validate(&$value, $schema = null, $checkMode = null): int
     {
         // reset errors prior to validation
         $this->reset();
@@ -84,7 +82,7 @@ class Validator extends BaseConstraint
      *
      * @deprecated
      */
-    public function check($value, $schema)
+    public function check($value, $schema): int
     {
         return $this->validate($value, $schema);
     }
@@ -94,7 +92,7 @@ class Validator extends BaseConstraint
      *
      * @deprecated
      */
-    public function coerce(&$value, $schema)
+    public function coerce(&$value, $schema): int
     {
         return $this->validate($value, $schema, Constraint::CHECK_MODE_COERCE_TYPES);
     }

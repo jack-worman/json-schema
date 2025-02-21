@@ -100,7 +100,7 @@ class ObjectIterator implements \Iterator, \Countable
     /**
      * Initializer
      */
-    private function initialize()
+    private function initialize(): void
     {
         if (!$this->initialized) {
             $this->data = $this->buildDataFromObject($this->object);

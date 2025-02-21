@@ -90,7 +90,7 @@ class TypeConstraint extends Constraint
      * @param ?JsonPointer $path
      * @param bool         $coerce
      */
-    protected function validateTypesArray(&$value, array $type, &$validTypesWording, &$isValid, $path, $coerce = false)
+    protected function validateTypesArray(&$value, array $type, &$validTypesWording, &$isValid, $path, $coerce = false): void
     {
         foreach ($type as $tp) {
             // already valid, so no need to waste cycles looping over everything
@@ -151,7 +151,7 @@ class TypeConstraint extends Constraint
      *
      * @throws StandardUnexpectedValueException
      */
-    protected function validateTypeNameWording($type)
+    protected function validateTypeNameWording($type): void
     {
         if (!array_key_exists($type, self::$wording)) {
             throw new StandardUnexpectedValueException(

@@ -27,7 +27,7 @@ class FormatConstraint extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function check(&$element, $schema = null, ?JsonPointer $path = null, $i = null): void
+    public function check(& $element, $schema = null, ?JsonPointer $path = null, $i = null): void
     {
         if (!isset($schema->format) || $this->factory->getConfig(self::CHECK_MODE_DISABLE_FORMAT)) {
             return;
@@ -169,7 +169,7 @@ class FormatConstraint extends Constraint
         }
     }
 
-    protected function validateDateTime($datetime, $format)
+    protected function validateDateTime($datetime, $format): bool
     {
         $dt = \DateTime::createFromFormat($format, (string) $datetime);
 
@@ -184,7 +184,7 @@ class FormatConstraint extends Constraint
         return false;
     }
 
-    protected function validateRegex($regex)
+    protected function validateRegex($regex): bool
     {
         if (!is_string($regex)) {
             return true;
@@ -193,7 +193,7 @@ class FormatConstraint extends Constraint
         return false !== @preg_match(self::jsonPatternToPhpRegex($regex), '');
     }
 
-    protected function validateColor($color)
+    protected function validateColor($color): bool
     {
         if (!is_string($color)) {
             return true;
@@ -205,10 +205,10 @@ class FormatConstraint extends Constraint
             return true;
         }
 
-        return preg_match('/^#([a-f0-9]{3}|[a-f0-9]{6})$/i', $color);
+        return 1 === preg_match('/^#([a-f0-9]{3}|[a-f0-9]{6})$/i', $color);
     }
 
-    protected function validateStyle($style)
+    protected function validateStyle($style): bool
     {
         $properties     = explode(';', rtrim($style, ';'));
         $invalidEntries = preg_grep('/^\s*[-a-z]+\s*:\s*.+$/i', $properties, PREG_GREP_INVERT);
@@ -216,12 +216,12 @@ class FormatConstraint extends Constraint
         return empty($invalidEntries);
     }
 
-    protected function validatePhone($phone)
+    protected function validatePhone($phone): bool
     {
-        return preg_match('/^\+?(\(\d{3}\)|\d{3}) \d{3} \d{4}$/', $phone);
+        return 1 === preg_match('/^\+?(\(\d{3}\)|\d{3}) \d{3} \d{4}$/', $phone);
     }
 
-    protected function validateHostname($host)
+    protected function validateHostname($host): bool
     {
         if (!is_string($host)) {
             return true;
@@ -229,6 +229,6 @@ class FormatConstraint extends Constraint
 
         $hostnameRegex = '/^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/i';
 
-        return preg_match($hostnameRegex, $host);
+        return 1 === preg_match($hostnameRegex, $host);
     }
 }

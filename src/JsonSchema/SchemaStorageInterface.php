@@ -12,7 +12,7 @@ interface SchemaStorageInterface
      * @param string $id
      * @param object $schema
      */
-    public function addSchema($id, $schema = null);
+    public function addSchema($id, $schema = null): void;
 
     /**
      * Returns schema for given identifier, or null if it does not exist

@@ -30,7 +30,7 @@ class ObjectConstraint extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function check(&$element, $schema = null, ?JsonPointer $path = null, $properties = null,
+    public function check(& $element, $schema = null, ?JsonPointer $path = null, $properties = null,
         $additionalProp = null, $patternProperties = null, $appliedDefaults = []): void
     {
         if ($element instanceof UndefinedConstraint) {
@@ -54,7 +54,10 @@ class ObjectConstraint extends Constraint
         $this->validateElement($element, $matches, $schema, $path, $properties, $additionalProp);
     }
 
-    public function validatePatternProperties($element, ?JsonPointer $path, $patternProperties)
+    /**
+     * @return list<string>
+     */
+    public function validatePatternProperties($element, ?JsonPointer $path, $patternProperties): array
     {
         $matches = [];
         foreach ($patternProperties as $pregex => $schema) {
@@ -87,7 +90,7 @@ class ObjectConstraint extends Constraint
      * @param mixed            $additionalProp Additional properties
      */
     public function validateElement($element, $matches, $schema = null, ?JsonPointer $path = null,
-        $properties = null, $additionalProp = null)
+        $properties = null, $additionalProp = null): void
     {
         $this->validateMinMaxConstraint($element, $schema, $path);
 
@@ -131,7 +134,7 @@ class ObjectConstraint extends Constraint
      * @param \stdClass        $properties Property definitions
      * @param JsonPointer|null $path       Path?
      */
-    public function validateProperties(&$element, $properties = null, ?JsonPointer $path = null)
+    public function validateProperties(& $element, $properties = null, ?JsonPointer $path = null): void
     {
         $undefinedConstraint = $this->factory->createInstanceFor('undefined');
 
@@ -155,7 +158,7 @@ class ObjectConstraint extends Constraint
      *
      * @return mixed
      */
-    protected function &getProperty(&$element, $property, $fallback = null)
+    protected function &getProperty(& $element, $property, $fallback = null)
     {
         if (is_array($element) && (isset($element[$property]) || array_key_exists($property, $element)) /*$this->checkMode == self::CHECK_MODE_TYPE_CAST*/) {
             return $element[$property];
@@ -173,7 +176,7 @@ class ObjectConstraint extends Constraint
      * @param \stdClass        $objectDefinition ObjectConstraint definition
      * @param JsonPointer|null $path             Path to test?
      */
-    protected function validateMinMaxConstraint($element, $objectDefinition, ?JsonPointer $path = null)
+    protected function validateMinMaxConstraint($element, $objectDefinition, ?JsonPointer $path = null): void
     {
         // Verify minimum number of properties
         if (isset($objectDefinition->minProperties) && !is_object($objectDefinition->minProperties)) {

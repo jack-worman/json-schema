@@ -61,7 +61,7 @@ class Curl extends AbstractRetriever
     /**
      * @param string $response cURL HTTP response
      */
-    private function fetchMessageBody($response)
+    private function fetchMessageBody($response): void
     {
         preg_match("/(?:\r\n){2}(.*)$/ms", $response, $match);
         $this->messageBody = $match[1];

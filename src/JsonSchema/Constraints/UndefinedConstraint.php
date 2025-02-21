@@ -63,7 +63,7 @@ class UndefinedConstraint extends Constraint
      * @param JsonPointer $path
      * @param string      $i
      */
-    public function validateTypes(&$value, $schema, JsonPointer $path, $i = null)
+    public function validateTypes(&$value, $schema, JsonPointer $path, $i = null): void
     {
         // check array
         if ($this->getTypeCheck()->isArray($value)) {
@@ -114,7 +114,7 @@ class UndefinedConstraint extends Constraint
      * @param JsonPointer $path
      * @param string      $i
      */
-    protected function validateCommonProperties(&$value, $schema, JsonPointer $path, $i = '')
+    protected function validateCommonProperties(&$value, $schema, JsonPointer $path, $i = ''): void
     {
         // if it extends another schema, it must pass that schema as well
         if (isset($schema->extends)) {
@@ -310,7 +310,7 @@ class UndefinedConstraint extends Constraint
      * @param JsonPointer $path
      * @param string      $i
      */
-    protected function validateOfProperties(&$value, $schema, JsonPointer $path, $i = '')
+    protected function validateOfProperties(&$value, $schema, JsonPointer $path, $i = ''): void
     {
         // Verify type
         if ($value instanceof self) {
@@ -384,7 +384,7 @@ class UndefinedConstraint extends Constraint
      * @param JsonPointer $path
      * @param string      $i
      */
-    protected function validateDependencies($value, $dependencies, JsonPointer $path, $i = '')
+    protected function validateDependencies($value, $dependencies, JsonPointer $path, $i = ''): void
     {
         foreach ($dependencies as $key => $dependency) {
             if ($this->getTypeCheck()->propertyExists($value, $key)) {
@@ -414,7 +414,7 @@ class UndefinedConstraint extends Constraint
         }
     }
 
-    protected function validateUri($schema, $schemaUri = null)
+    protected function validateUri($schema, $schemaUri = null): ?object
     {
         $resolver = new UriResolver();
         $retriever = $this->factory->getUriRetriever();

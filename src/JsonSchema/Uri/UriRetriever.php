@@ -59,7 +59,7 @@ class UriRetriever implements BaseUriRetrieverInterface
      *
      * @param string $endpoint
      */
-    public function addInvalidContentTypeEndpoint($endpoint)
+    public function addInvalidContentTypeEndpoint($endpoint): void
     {
         $this->allowedInvalidContentTypeEndpoints[] = $endpoint;
     }
@@ -163,7 +163,7 @@ class UriRetriever implements BaseUriRetrieverInterface
     /**
      * {@inheritdoc}
      */
-    public function retrieve($uri, $baseUri = null, $translate = true)
+    public function retrieve($uri, $baseUri = null, $translate = true): ?object
     {
         $resolver = new UriResolver();
         $resolvedUri = $fetchUri = $resolver->resolve($uri, $baseUri);
@@ -316,10 +316,8 @@ class UriRetriever implements BaseUriRetrieverInterface
 
     /**
      * @param string $uri
-     *
-     * @return bool
      */
-    public function isValid($uri)
+    public function isValid($uri): bool
     {
         $components = $this->parse($uri);
 
@@ -329,7 +327,7 @@ class UriRetriever implements BaseUriRetrieverInterface
     /**
      * Set a URL translation rule
      */
-    public function setTranslation($from, $to)
+    public function setTranslation($from, $to): void
     {
         $this->translationMap[$from] = $to;
     }
@@ -337,7 +335,7 @@ class UriRetriever implements BaseUriRetrieverInterface
     /**
      * Apply URI translation rules
      */
-    public function translate($uri)
+    public function translate($uri): string
     {
         foreach ($this->translationMap as $from => $to) {
             $uri = preg_replace($from, $to, $uri);

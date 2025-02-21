@@ -13,6 +13,7 @@ namespace JsonSchema\Constraints;
 
 use JsonSchema\ConstraintError;
 use JsonSchema\Entity\JsonPointer;
+use JsonSchema\Exception\RuntimeException;
 
 /**
  * The StringConstraint Constraints, validates an string against a given schema
@@ -25,7 +26,7 @@ class StringConstraint extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function check(&$element, $schema = null, ?JsonPointer $path = null, $i = null): void
+    public function check(& $element, $schema = null, ?JsonPointer $path = null, $i = null): void
     {
         // Verify maxLength
         if (isset($schema->maxLength) && $this->strlen($element) > $schema->maxLength) {
@@ -51,10 +52,15 @@ class StringConstraint extends Constraint
         $this->checkFormat($element, $schema, $path, $i);
     }
 
-    private function strlen($string)
+    private function strlen($string): int
     {
         if (extension_loaded('mbstring')) {
-            return mb_strlen($string, mb_detect_encoding($string));
+            $result = mb_strlen($string, mb_detect_encoding($string));
+            if ($result === false) {
+                throw new RuntimeException('mb_strlen() failed.');
+            }
+
+            return $result;
         }
 
         // mbstring is present on all test platforms, so strlen() can be ignored for coverage

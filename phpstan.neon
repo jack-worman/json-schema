@@ -2,7 +2,8 @@ parameters:
     level: 8
     paths:
         - ./src/
-    ignoreErrors: []
+#    ignoreErrors:
+#        - message: '~has no return type specified~'
     phpVersion: 70200
 
 includes:
