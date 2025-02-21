@@ -108,9 +108,9 @@ class UndefinedConstraint extends Constraint
     /**
      * Validates common properties
      *
-     * @param mixed       $value
-     * @param mixed       $schema
-     * @param string      $i
+     * @param mixed  $value
+     * @param mixed  $schema
+     * @param string $i
      */
     protected function validateCommonProperties(&$value, $schema, JsonPointer $path, $i = ''): void
     {
