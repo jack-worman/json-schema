@@ -24,5 +24,5 @@ interface UriResolverInterface
      *
      * @return string Absolute URI
      */
-    public function resolve($uri, $baseUri = null);
+    public function resolve($uri, $baseUri = null): string;
 }

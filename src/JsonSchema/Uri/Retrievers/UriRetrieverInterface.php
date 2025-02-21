@@ -24,15 +24,11 @@ interface UriRetrieverInterface
      * @param string $uri URI that resolves to a JSON schema
      *
      * @throws \JsonSchema\Exception\ResourceNotFoundException
-     *
-     * @return mixed string|null
      */
-    public function retrieve($uri);
+    public function retrieve($uri): string;
 
     /**
      * Get media content type
-     *
-     * @return string
      */
-    public function getContentType();
+    public function getContentType(): ?string;
 }

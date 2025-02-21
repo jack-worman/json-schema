@@ -128,10 +128,8 @@ class TypeConstraint extends Constraint
      * @param array  $elements  The elements to implode
      * @param string $delimiter The delimiter to use
      * @param bool   $listEnd   The last delimiter to use (defaults to $delimiter)
-     *
-     * @return string
      */
-    protected function implodeWith(array $elements, $delimiter = ', ', $listEnd = false)
+    protected function implodeWith(array $elements, $delimiter = ', ', $listEnd = false): string
     {
         if ($listEnd === false || !isset($elements[1])) {
             return implode($delimiter, $elements);
@@ -170,10 +168,8 @@ class TypeConstraint extends Constraint
      * @param string $type  TypeConstraint to check against
      *
      * @throws InvalidArgumentException
-     *
-     * @return bool
      */
-    protected function validateType(&$value, $type, $coerce = false)
+    protected function validateType(&$value, $type, $coerce = false): bool
     {
         //mostly the case for inline schema
         if (!$type) {

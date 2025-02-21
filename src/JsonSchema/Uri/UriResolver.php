@@ -25,10 +25,8 @@ class UriResolver implements UriResolverInterface
      * Parses a URI into five main components
      *
      * @param string $uri
-     *
-     * @return array
      */
-    public function parse($uri)
+    public function parse($uri): array
     {
         preg_match('|^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?|', (string) $uri, $match);
 
@@ -54,10 +52,8 @@ class UriResolver implements UriResolverInterface
      * Builds a URI based on n array with the main components
      *
      * @param array $components
-     *
-     * @return string
      */
-    public function generate(array $components)
+    public function generate(array $components): string
     {
         $uri = $components['scheme'] . '://'
              . $components['authority']
@@ -76,7 +72,7 @@ class UriResolver implements UriResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve($uri, $baseUri = null)
+    public function resolve($uri, $baseUri = null): string
     {
         // treat non-uri base as local file path
         if (
@@ -124,7 +120,7 @@ class UriResolver implements UriResolverInterface
      *
      * @return string Merged path
      */
-    public static function combineRelativePathWithBasePath($relativePath, $basePath)
+    public static function combineRelativePathWithBasePath($relativePath, $basePath): string
     {
         $relativePath = self::normalizePath($relativePath);
         if (!$relativePath) {
@@ -164,10 +160,8 @@ class UriResolver implements UriResolverInterface
      * Normalizes a URI path component by removing dot-slash and double slashes
      *
      * @param string $path
-     *
-     * @return string
      */
-    private static function normalizePath($path)
+    private static function normalizePath($path): string
     {
         $path = preg_replace('|((?<!\.)\./)*|', '', $path);
         $path = preg_replace('|//|', '/', $path);
@@ -177,10 +171,8 @@ class UriResolver implements UriResolverInterface
 
     /**
      * @param string $uri
-     *
-     * @return bool
      */
-    public function isValid($uri)
+    public function isValid($uri): bool
     {
         $components = $this->parse($uri);
 

@@ -12,10 +12,8 @@ class Rfc3339
      * Try creating a DateTime instance
      *
      * @param string $string
-     *
-     * @return \DateTime|null
      */
-    public static function createFromString($string)
+    public static function createFromString($string): ?\DateTime
     {
         if (!preg_match(self::REGEX, strtoupper($string), $matches)) {
             return null;

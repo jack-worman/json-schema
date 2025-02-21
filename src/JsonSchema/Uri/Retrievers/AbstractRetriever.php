@@ -21,7 +21,7 @@ abstract class AbstractRetriever implements UriRetrieverInterface
     /**
      * Media content type
      *
-     * @var string
+     * @var string|null
      */
     protected $contentType;
 
@@ -30,7 +30,7 @@ abstract class AbstractRetriever implements UriRetrieverInterface
      *
      * @see \JsonSchema\Uri\Retrievers\UriRetrieverInterface::getContentType()
      */
-    public function getContentType()
+    public function getContentType(): ?string
     {
         return $this->contentType;
     }

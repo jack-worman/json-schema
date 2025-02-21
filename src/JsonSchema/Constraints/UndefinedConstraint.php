@@ -210,10 +210,8 @@ class UndefinedConstraint extends Constraint
      * @param mixed $schema
      * @param mixed $parentSchema
      * @param bool  $requiredOnly
-     *
-     * @return bool
      */
-    private function shouldApplyDefaultValue($requiredOnly, $schema, $name = null, $parentSchema = null)
+    private function shouldApplyDefaultValue($requiredOnly, $schema, $name = null, $parentSchema = null): bool
     {
         // required-only mode is off
         if (!$requiredOnly) {

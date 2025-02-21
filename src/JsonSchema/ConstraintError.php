@@ -54,10 +54,7 @@ class ConstraintError extends Enum
     public const TYPE = 'type';
     public const UNIQUE_ITEMS = 'uniqueItems';
 
-    /**
-     * @return string
-     */
-    public function getMessage()
+    public function getMessage(): string
     {
         $name = $this->getValue();
         static $messages = [

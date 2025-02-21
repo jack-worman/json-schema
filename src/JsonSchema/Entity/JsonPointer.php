@@ -54,7 +54,7 @@ class JsonPointer
      *
      * @return string[]
      */
-    private function decodePropertyPaths($propertyPathString)
+    private function decodePropertyPaths($propertyPathString): array
     {
         $paths = [];
         foreach (explode('/', trim($propertyPathString, '/')) as $path) {
@@ -67,10 +67,7 @@ class JsonPointer
         return $paths;
     }
 
-    /**
-     * @return array
-     */
-    private function encodePropertyPaths()
+    private function encodePropertyPaths(): array
     {
         return array_map(
             [$this, 'encodePath'],
@@ -80,28 +77,21 @@ class JsonPointer
 
     /**
      * @param string $path
-     *
-     * @return string
      */
-    private function decodePath($path)
+    private function decodePath($path): string
     {
         return strtr($path, ['~1' => '/', '~0' => '~', '%25' => '%']);
     }
 
     /**
      * @param string $path
-     *
-     * @return string
      */
-    private function encodePath($path)
+    private function encodePath($path): string
     {
         return strtr($path, ['/' => '~1', '~' => '~0', '%' => '%25']);
     }
 
-    /**
-     * @return string
-     */
-    public function getFilename()
+    public function getFilename(): string
     {
         return $this->filename;
     }
@@ -109,17 +99,15 @@ class JsonPointer
     /**
      * @return string[]
      */
-    public function getPropertyPaths()
+    public function getPropertyPaths(): array
     {
         return $this->propertyPaths;
     }
 
     /**
-     * @param array $propertyPaths
-     *
-     * @return JsonPointer
+     * @return static
      */
-    public function withPropertyPaths(array $propertyPaths)
+    public function withPropertyPaths(array $propertyPaths): JsonPointer
     {
         $new = clone $this;
         $new->propertyPaths = array_map(function ($p): string { return (string) $p; }, $propertyPaths);
@@ -127,18 +115,12 @@ class JsonPointer
         return $new;
     }
 
-    /**
-     * @return string
-     */
-    public function getPropertyPathAsString()
+    public function getPropertyPathAsString(): string
     {
         return rtrim('#/' . implode('/', $this->encodePropertyPaths()), '/');
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getFilename() . $this->getPropertyPathAsString();
     }
@@ -153,10 +135,8 @@ class JsonPointer
 
     /**
      * Check whether the value at this path was set from a schema default
-     *
-     * @return bool
      */
-    public function fromDefault()
+    public function fromDefault(): bool
     {
         return $this->fromDefault;
     }

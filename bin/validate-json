@@ -92,11 +92,10 @@ function getUrlFromPath($path)
 /**
  * Take a HTTP header value and split it up into parts.
  *
- * @param $headerValue
  * @return array Key "_value" contains the main value, all others
  *               as given in the header value
  */
-function parseHeaderValue($headerValue)
+function parseHeaderValue($headerValue): array
 {
     if (strpos($headerValue, ';') === false) {
         return ['_value' => $headerValue];

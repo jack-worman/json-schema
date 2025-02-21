@@ -44,7 +44,7 @@ class PredefinedArray extends AbstractRetriever
      *
      * @see \JsonSchema\Uri\Retrievers\UriRetrieverInterface::retrieve()
      */
-    public function retrieve($uri)
+    public function retrieve($uri): string
     {
         if (!array_key_exists($uri, $this->schemas)) {
             throw new \JsonSchema\Exception\ResourceNotFoundException(sprintf(

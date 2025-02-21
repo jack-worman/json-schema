@@ -36,7 +36,7 @@ class Curl extends AbstractRetriever
      *
      * @see \JsonSchema\Uri\Retrievers\UriRetrieverInterface::retrieve()
      */
-    public function retrieve($uri)
+    public function retrieve($uri): string
     {
         $ch = curl_init();
 
@@ -72,7 +72,7 @@ class Curl extends AbstractRetriever
      *
      * @return bool Whether the Content-Type header was found or not
      */
-    protected function fetchContentType($response)
+    protected function fetchContentType($response): bool
     {
         if (0 < preg_match("/Content-Type:(\V*)/ims", $response, $match)) {
             $this->contentType = trim($match[1]);

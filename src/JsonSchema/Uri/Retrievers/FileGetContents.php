@@ -27,7 +27,7 @@ class FileGetContents extends AbstractRetriever
      *
      * @see \JsonSchema\Uri\Retrievers\UriRetrieverInterface::retrieve()
      */
-    public function retrieve($uri)
+    public function retrieve($uri): string
     {
         $errorMessage = null;
         set_error_handler(function ($errno, $errstr) use (&$errorMessage) {
@@ -68,7 +68,7 @@ class FileGetContents extends AbstractRetriever
      *
      * @return bool Whether the Content-Type header was found or not
      */
-    private function fetchContentType(array $headers)
+    private function fetchContentType(array $headers): bool
     {
         foreach (array_reverse($headers) as $header) {
             if ($this->contentType = self::getContentTypeMatchInHeader($header)) {
@@ -81,10 +81,8 @@ class FileGetContents extends AbstractRetriever
 
     /**
      * @param string $header
-     *
-     * @return string|null
      */
-    protected static function getContentTypeMatchInHeader($header)
+    protected static function getContentTypeMatchInHeader($header): ?string
     {
         if (0 < preg_match("/Content-Type:(\V*)/ims", $header, $match)) {
             return trim($match[1]);

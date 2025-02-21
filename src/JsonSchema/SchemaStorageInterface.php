@@ -18,8 +18,7 @@ interface SchemaStorageInterface
      * Returns schema for given identifier, or null if it does not exist
      *
      * @param string $id
-     *
-     * @return object
+     * @return object|string|false|null
      */
     public function getSchema($id);
 
@@ -27,8 +26,7 @@ interface SchemaStorageInterface
      * Returns schema for given reference with all sub-references resolved
      *
      * @param string $ref
-     *
-     * @return object
+     * @return object|false
      */
     public function resolveRef($ref);
 
@@ -36,8 +34,7 @@ interface SchemaStorageInterface
      * Returns schema referenced by '$ref' property
      *
      * @param mixed $refSchema
-     *
-     * @return object
+     * @return object|string|null
      */
     public function resolveRefSchema($refSchema);
 }

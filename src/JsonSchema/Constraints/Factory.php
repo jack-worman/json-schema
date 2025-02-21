@@ -180,7 +180,6 @@ class Factory
      * @throws InvalidArgumentException if is not possible create the constraint instance
      *
      * @return ConstraintInterface&BaseConstraint
-     * @phpstan-return ConstraintInterface&BaseConstraint
      */
     public function createInstanceFor($constraintName)
     {

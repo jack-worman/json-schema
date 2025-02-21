@@ -110,10 +110,8 @@ class ObjectIterator implements \Iterator, \Countable
 
     /**
      * @param object $object
-     *
-     * @return array
      */
-    private function buildDataFromObject($object)
+    private function buildDataFromObject($object): array
     {
         $result = [];
 
@@ -138,10 +136,8 @@ class ObjectIterator implements \Iterator, \Countable
 
     /**
      * @param object|array $item
-     *
-     * @return array
      */
-    private function getDataFromItem($item)
+    private function getDataFromItem($item): array
     {
         if (!is_object($item) && !is_array($item)) {
             return [];

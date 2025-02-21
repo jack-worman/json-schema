@@ -26,18 +26,12 @@ class SchemaStorage implements SchemaStorageInterface
         $this->uriResolver = $uriResolver ?: new UriResolver();
     }
 
-    /**
-     * @return UriRetrieverInterface
-     */
-    public function getUriRetriever()
+    public function getUriRetriever(): UriRetrieverInterface
     {
         return $this->uriRetriever;
     }
 
-    /**
-     * @return UriResolverInterface
-     */
-    public function getUriResolver()
+    public function getUriResolver(): UriResolverInterface
     {
         return $this->uriResolver;
     }
@@ -109,7 +103,7 @@ class SchemaStorage implements SchemaStorageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return object|string|false|null
      */
     public function getSchema($id)
     {
@@ -121,7 +115,7 @@ class SchemaStorage implements SchemaStorageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return object|false
      */
     public function resolveRef($ref, $resolveStack = [])
     {
@@ -156,7 +150,7 @@ class SchemaStorage implements SchemaStorageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return object|string|null
      */
     public function resolveRefSchema($refSchema, $resolveStack = [])
     {

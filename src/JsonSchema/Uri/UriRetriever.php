@@ -69,20 +69,18 @@ class UriRetriever implements BaseUriRetrieverInterface
      *
      * @param UriRetrieverInterface $uriRetriever
      * @param string                $uri
-     *
-     * @return bool|void
      */
-    public function confirmMediaType($uriRetriever, $uri)
+    public function confirmMediaType($uriRetriever, $uri): ?bool
     {
         $contentType = $uriRetriever->getContentType();
 
         if (is_null($contentType)) {
             // Well, we didn't get an invalid one
-            return;
+            return null;
         }
 
         if (in_array($contentType, [Validator::SCHEMA_MEDIA_TYPE, 'application/json'])) {
-            return;
+            return null;
         }
 
         foreach ($this->allowedInvalidContentTypeEndpoints as $endpoint) {
@@ -99,10 +97,8 @@ class UriRetriever implements BaseUriRetrieverInterface
      *
      * If none is specified, sets a default FileGetContents retriever and
      * returns that object.
-     *
-     * @return UriRetrieverInterface
      */
-    public function getUriRetriever()
+    public function getUriRetriever(): UriRetrieverInterface
     {
         if (is_null($this->uriRetriever)) {
             $this->setUriRetriever(new FileGetContents());
@@ -125,7 +121,7 @@ class UriRetriever implements BaseUriRetrieverInterface
      *
      * @return object JSON Schema after walking down the fragment pieces
      */
-    public function resolvePointer($jsonSchema, $uri)
+    public function resolvePointer($jsonSchema, $uri): object
     {
         $resolver = new UriResolver();
         $parsed = $resolver->parse($uri);
@@ -198,7 +194,7 @@ class UriRetriever implements BaseUriRetrieverInterface
      *
      * @param string $fetchUri Absolute URI
      *
-     * @return object JSON schema object
+     * @return object|string JSON schema object
      */
     protected function loadSchema($fetchUri)
     {
@@ -223,11 +219,9 @@ class UriRetriever implements BaseUriRetrieverInterface
     /**
      * Set the URI Retriever
      *
-     * @param UriRetrieverInterface $uriRetriever
-     *
      * @return $this for chaining
      */
-    public function setUriRetriever(UriRetrieverInterface $uriRetriever)
+    public function setUriRetriever(UriRetrieverInterface $uriRetriever): self
     {
         $this->uriRetriever = $uriRetriever;
 
@@ -238,10 +232,8 @@ class UriRetriever implements BaseUriRetrieverInterface
      * Parses a URI into five main components
      *
      * @param string $uri
-     *
-     * @return array
      */
-    public function parse($uri)
+    public function parse($uri): array
     {
         preg_match('|^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?|', $uri, $match);
 
@@ -267,12 +259,8 @@ class UriRetriever implements BaseUriRetrieverInterface
 
     /**
      * Builds a URI based on n array with the main components
-     *
-     * @param array $components
-     *
-     * @return string
      */
-    public function generate(array $components)
+    public function generate(array $components): string
     {
         $uri = $components['scheme'] . '://'
              . $components['authority']
@@ -294,10 +282,8 @@ class UriRetriever implements BaseUriRetrieverInterface
      *
      * @param string $uri     Absolute or relative
      * @param string $baseUri Optional base URI
-     *
-     * @return string
      */
-    public function resolve($uri, $baseUri = null)
+    public function resolve($uri, $baseUri = null): string
     {
         $components = $this->parse($uri);
         $path = $components['path'];
