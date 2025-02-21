@@ -374,9 +374,9 @@ class UndefinedConstraint extends Constraint
     /**
      * Validate dependencies
      *
-     * @param mixed       $value
-     * @param mixed       $dependencies
-     * @param string      $i
+     * @param mixed  $value
+     * @param mixed  $dependencies
+     * @param string $i
      */
     protected function validateDependencies($value, $dependencies, JsonPointer $path, $i = ''): void
     {
