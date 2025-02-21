@@ -50,8 +50,6 @@ class UriResolver implements UriResolverInterface
 
     /**
      * Builds a URI based on n array with the main components
-     *
-     * @param array $components
      */
     public function generate(array $components): string
     {
