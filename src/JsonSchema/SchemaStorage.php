@@ -82,7 +82,7 @@ class SchemaStorage implements SchemaStorageInterface
      * @param mixed  $schema
      * @param string $base
      */
-    private function expandRefs(& $schema, $base = null): void
+    private function expandRefs(&$schema, $base = null): void
     {
         if (!is_object($schema)) {
             if (is_array($schema)) {

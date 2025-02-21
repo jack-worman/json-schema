@@ -30,7 +30,7 @@ class ObjectConstraint extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function check(& $element, $schema = null, ?JsonPointer $path = null, $properties = null,
+    public function check(&$element, $schema = null, ?JsonPointer $path = null, $properties = null,
         $additionalProp = null, $patternProperties = null, $appliedDefaults = []): void
     {
         if ($element instanceof UndefinedConstraint) {
@@ -134,7 +134,7 @@ class ObjectConstraint extends Constraint
      * @param \stdClass        $properties Property definitions
      * @param JsonPointer|null $path       Path?
      */
-    public function validateProperties(& $element, $properties = null, ?JsonPointer $path = null): void
+    public function validateProperties(&$element, $properties = null, ?JsonPointer $path = null): void
     {
         $undefinedConstraint = $this->factory->createInstanceFor('undefined');
 
@@ -158,7 +158,7 @@ class ObjectConstraint extends Constraint
      *
      * @return mixed
      */
-    protected function &getProperty(& $element, $property, $fallback = null)
+    protected function &getProperty(&$element, $property, $fallback = null)
     {
         if (is_array($element) && (isset($element[$property]) || array_key_exists($property, $element)) /*$this->checkMode == self::CHECK_MODE_TYPE_CAST*/) {
             return $element[$property];
